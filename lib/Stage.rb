@@ -3,4 +3,7 @@
 # describing differengt lavels of test.
 #
 class Stage
+  def initialize(opts)
+    @command = opts[:command]
+  end
 end

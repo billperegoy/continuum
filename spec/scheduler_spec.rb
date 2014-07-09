@@ -5,7 +5,7 @@ describe Scheduler do
     scheduler = Scheduler.new
     project = Project.new(name: 'my_proj', scheduler: scheduler)
     scheduler.add_project(project)
-    stage_0 = Stage.new
+    stage_0 = Stage.new(command: 'sleep 60')
     project.add_stage(stage_0)
     expect(scheduler.active_job_count).to eq(0)
 
