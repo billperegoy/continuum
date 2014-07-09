@@ -9,7 +9,8 @@ describe Scheduler do
     project.add_stage(stage_0)
     expect(scheduler.active_job_count).to eq(0)
 
-    project.add_release(id: 'release_id')
+    release = Release.new(project: project, id: 'release_id')
+    project.add_release(release)
 
     # TODO - Add logic to make this pass
     # expect(scheduler.active_job_count).to eq(1)
