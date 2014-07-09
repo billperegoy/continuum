@@ -4,12 +4,23 @@
 #
 class Scheduler
   def initialize
+    @regressions = []
   end
 
   def add_project(project)
   end
 
+  def register_release(release)
+    # TODO
+    project = release.get_project
+    regression = Regression.new(project: project,
+                                stage: project.stages[0],
+                                release: release)
+
+    @regressions << regression
+  end
+
   def active_job_count
-    0
+    @regressions.length
   end
 end

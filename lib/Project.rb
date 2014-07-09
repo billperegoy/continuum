@@ -2,10 +2,11 @@
 # tested with continuum.
 #
 class Project
-  attr_reader :name
+  attr_reader :name, :stages
 
   def initialize(opts)
     @name = opts[:name]
+    @scheduler = opts[:scheduler]
     @stages = []
     @releases = []
   end
@@ -16,6 +17,8 @@ class Project
 
   def add_release(release)
     @releases << release
+    # Tell the scheduler about this new release
+    @scheduler.register_release(release)
   end
 
   def stage_count

@@ -6,4 +6,8 @@ class Release
     @project = opts[:project]
     @id = opts[:id]
   end
+
+  def get_project
+    @project
+  end
 end
