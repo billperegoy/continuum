@@ -1,0 +1,3 @@
+Continuum is a continuous integration server optimized for 
+long-running hardware design processes which need to arbitrate
+for expensive resources (EDA licenses).
