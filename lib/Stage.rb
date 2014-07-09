@@ -3,6 +3,8 @@
 # describing differengt lavels of test.
 #
 class Stage
+  attr_reader :command
+
   def initialize(opts)
     @command = opts[:command]
   end
