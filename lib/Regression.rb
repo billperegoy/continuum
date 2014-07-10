@@ -6,6 +6,8 @@ class Regression
     @project = opts[:project]
     @release = opts[:release]
     @stage = opts[:stage]
+
+    @observers = []
   end
 
   def run
@@ -13,5 +15,16 @@ class Regression
     puts "[Info] CMD: #{@stage.command}"
     # Need to set up an observer on the scheduler
     # so it can send results.
+    notify_observers(:run)
+  end
+
+  def add_observer(observer)
+    @observers << observer
+  end
+
+  def notify_observers(status)
+    @observers.each do |observer|
+      observer.update(status)
+    end
   end
 end

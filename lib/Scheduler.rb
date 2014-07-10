@@ -11,7 +11,6 @@ class Scheduler
   end
 
   def register_release(release)
-    # TODO
     project = release.get_project
     regression = Regression.new(scheduler: self,
                                 project: project,
@@ -21,7 +20,12 @@ class Scheduler
     @regressions << regression
     # We need to run the regression and set up an observer to
     # tell us when it is done.
+    regression.add_observer(self)
     regression.run
+  end
+
+  def update(status)
+    puts "[Info] Received update of type: #{status}"
   end
 
   def active_job_count
