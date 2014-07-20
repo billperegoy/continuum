@@ -5,6 +5,7 @@
 class Scheduler
   def initialize
     @regressions = []
+    @current_regression = 0
   end
 
   def add_project(project)
@@ -12,23 +13,39 @@ class Scheduler
 
   def register_release(release)
     project = release.get_project
-    regression = Regression.new(scheduler: self,
+    regression = Regression.new(id: @current_regression,
+                                scheduler: self,
                                 project: project,
                                 stage: project.stages[0],
                                 release: release)
+    @current_regression += 1
 
     @regressions << regression
-    # We need to run the regression and set up an observer to
-    # tell us when it is done.
     regression.add_observer(self)
-    regression.run
+
+    if active_regressions(project, 0) == 0
+      #Thread.new { regression.run }
+      regression.run
+    end
   end
 
   def update(status)
-    puts "[Info] Received update of type: #{status}"
+    puts "[Info] Received update of type: #{status.state}"
+    # Need to remove regressions from the list when they are done.
+    # How do I identify it?
+    # Should I switch this to rails and use the db id?
   end
 
   def active_job_count
     @regressions.length
+  end
+
+  def active_regressions(project, level)
+    active_regressions = @regressions.select do |regr|
+      regr.project.name == project.name &&
+      regr.stage.level == level &&
+      regr.running?
+    end
+    active_regressions.count
   end
 end
