@@ -14,8 +14,6 @@ class Regression
   end
 
   def run
-    puts "[Info] Running regression"
-    puts "[Info] CMD: #{@stage.command}"
     @status.start
     notify_observers(@status)
 

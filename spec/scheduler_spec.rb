@@ -7,7 +7,9 @@ describe Scheduler do
     project = Project.new(name: 'my_proj', scheduler: scheduler)
     scheduler.add_project(project)
     stage_0 = Stage.new(level: 0, command: 'sleep 60')
+    stage_1 = Stage.new(level: 1, command: 'sleep 60')
     project.add_stage(stage_0)
+    project.add_stage(stage_1)
     expect(scheduler.active_job_count).to eq(0)
 
     project
@@ -35,7 +37,11 @@ describe Scheduler do
 
   it "starts a level 1 regression when a level 0 regresion is done " +
      "and nothing else is running" do
-    pending
-    expect(true).to eq(false)
+    pending "No way to finish jobs yet"
+    release1 = Release.new(project: project, id: 'release_id1')
+    project.add_release(release1)
+
+    active_regressions = scheduler.active_regressions(project, 1)
+    expect(active_regressions).to eq(1)
   end
 end
