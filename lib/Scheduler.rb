@@ -6,6 +6,7 @@ class Scheduler
   def initialize
     @regressions = []
     @current_regression = 0
+    @procs = []
   end
 
   def add_project(project)
@@ -24,8 +25,11 @@ class Scheduler
     regression.add_observer(self)
 
     if active_regressions(project, 0) == 0
-      #Thread.new { regression.run }
-      regression.run
+      proc = Thread.new { regression.run }
+      @procs << proc
+
+      # FIXME - This is blocking. Need better threading mechanism.
+      wait_for_all_done
     end
   end
 
@@ -47,5 +51,11 @@ class Scheduler
       regr.running?
     end
     active_regressions.count
+  end
+
+  def wait_for_all_done
+    @procs.each do |t|
+      t.join
+    end
   end
 end
