@@ -9,9 +9,6 @@ class Scheduler
     @procs = []
   end
 
-  def add_project(project)
-  end
-
   def register_release(release)
     project = release.get_project
     regression = Regression.new(id: @current_regression,

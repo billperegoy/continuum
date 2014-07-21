@@ -1,0 +1,43 @@
+// Return an array of all projects.
+// For each project, retun an array of all regressions
+// that either started or ended dueing that time period
+//
+// Need a function to transform each project array into
+// a summary showing how many jobs are running at any single
+// time interval.
+//
+[
+  {'name' : 'proj1',
+    [
+      { 'start_time' : <time>,
+        'end_time' : <time>,
+        'regression' : <reg_id>,
+        'level' : <level>,
+        'status' : <status>
+      },
+      { 'start_time' : <time>,
+        'end_time' : <time>,
+        'regression' : <reg_id>,
+        'level' : <level>,
+        'status' : <status>
+      }
+    ]
+  },
+
+  {'name' : 'proj2',
+    [
+      { 'start_time' : <time>,
+        'end_time' : <time>,
+        'regression' : <reg_id>,
+        'level' : <level>,
+        'status' : <status>
+      },
+      { 'start_time' : <time>,
+        'end_time' : <time>,
+        'regression' : <reg_id>,
+        'level' : <level>,
+        'status' : <status>
+      }
+    ]
+  }
+]

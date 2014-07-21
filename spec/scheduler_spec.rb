@@ -5,7 +5,6 @@ describe Scheduler do
 
   let(:project) do
     project = Project.new(name: 'my_proj', scheduler: scheduler)
-    scheduler.add_project(project)
     stage_0 = Stage.new(level: 0, command: 'sleep 60')
     stage_1 = Stage.new(level: 1, command: 'sleep 60')
     project.add_stage(stage_0)
