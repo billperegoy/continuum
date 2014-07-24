@@ -2,7 +2,7 @@
 # tested with continuum.
 #
 class Project
-  attr_reader :name, :stages
+  attr_reader :name, :stages   
 
   def initialize(opts)
     @name = opts[:name]
